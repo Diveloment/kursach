@@ -84,7 +84,17 @@ class Register(View):
 
 
 class AccountView(View):
-    template_name = 'main/account.html'
+    template_name = 'main/profile.html'
+
+    def get(self, request):
+        context = {
+
+        }
+        return render(request, self.template_name, context)
+
+
+class AccountViewRequests(View):
+    template_name = 'main/requests.html'
 
     def get(self, request):
         context = {

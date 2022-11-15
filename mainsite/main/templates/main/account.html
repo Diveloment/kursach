@@ -114,8 +114,8 @@
             <div class="usernav">
                 <ul>
                     <li class="back"><p><i class="fa-solid fa-user"></i> АККАУНТ</p></li>
-                    <li class="href"><a href="#">Профиль</a></li>
-                    <li class="href"><a href="#">Мои заявки</a></li>
+                    <li class="href"><a href="{% url 'profile' %}">Профиль</a></li>
+                    <li class="href"><a href="{% url 'requests' %}">Мои заявки</a></li>
                     <li class="href"><a href="#">Уведомления</a></li>
                     <li class="back"><p><i class="fa-solid fa-gear"></i> СЕРВИС</p></li>
                     <li class="href"><a href="#">Смена пароля</a></li>
@@ -123,7 +123,8 @@
                 </ul>
             </div>
             <div class="useractions">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores blanditiis ipsum nisi nulla? Adipisci aliquid amet animi, dicta dolore dolorum eaque earum eligendi error impedit incidunt inventore laborum libero, maiores minima mollitia nisi nobis quibusdam quidem quis sit sunt voluptate voluptatum. Blanditiis cum deleniti eius nobis veritatis? Ad aliquid amet asperiores culpa deserunt dicta distinctio dolore doloribus eaque est exercitationem explicabo facilis fuga, fugit hic id iusto laudantium magnam magni maiores necessitatibus nihil non omnis praesentium provident quia quod recusandae rerum similique tempora unde ut vel veniam vitae voluptate voluptates voluptatum? Ab accusamus alias asperiores aspernatur at atque consequuntur debitis dolorum eaque eligendi et ex expedita, facere, in inventore ipsa ipsum labore molestias necessitatibus nesciunt nisi nostrum nulla odio optio placeat quas quibusdam quidem quos, ratione repudiandae suscipit tempora temporibus ullam velit veniam vero voluptate? Accusamus aliquid delectus dignissimos eos, excepturi exercitationem illo itaque nam possimus, reiciendis repellat velit, veniam.
+                {% block usercontent %}
+                {% endblock %}
             </div>
         </div>
     </div>

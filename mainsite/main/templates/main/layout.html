@@ -24,12 +24,12 @@
                 {% endif %}
 
                 {% if user.is_superuser  %}
-                    <a class="headeri" href="admin/">ПАНЕЛЬ АДМИНА</a>
+                    <a class="headeri" href="/admin/">АДМИНИСТРИРОВАНИЕ</a>
                 {% elif user.is_staff %}
-                    <a class="headeri" href="{% url 'account' %}">ЛИЧНЫЙ КАБИНЕТ</a>
-                    <a class="headeri" href="admin/">ПАНЕЛЬ АДМИНА</a>
+                    <a class="headeri" href="{% url 'profile' %}">ЛИЧНЫЙ КАБИНЕТ</a>
+                    <a class="headeri" href="/admin/">АДМИНИСТРИРОВАНИЕ</a>
                 {% elif user.is_authenticated %}
-                    <a class="headeri" href="{% url 'account' %}">ЛИЧНЫЙ КАБИНЕТ</a>
+                    <a class="headeri" href="{% url 'profile' %}">ЛИЧНЫЙ КАБИНЕТ</a>
                 {% else %}
                     <a class="headeri" href="{% url 'login' %}">ЛИЧНЫЙ КАБИНЕТ</a>
                 {% endif %}
