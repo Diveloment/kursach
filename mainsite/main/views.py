@@ -13,7 +13,26 @@ from main.utils import send_email
 
 from main.forms import AuthenticationForm
 
+from main.forms import UserChangeForm
+
 User = get_user_model()
+
+
+def get_user(uidb64):
+    try:
+        # urlsafe_base64_decode() decodes to bytestring
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=uid)
+    except (
+            TypeError,
+            ValueError,
+            OverflowError,
+            User.DoesNotExist,
+            ValidationError,
+    ):
+        user = None
+    return user
+
 
 def index(request):
     data = {
@@ -33,28 +52,13 @@ class MyLoginView(LoginView):
 
 class EmailVerify(View):
     def get(self, request, uidb64, token):
-        user = self.get_user(uidb64)
+        user = get_user(uidb64)
 
         if user and token_generator.check_token(user, token):
             user.email_verify = True
             user.save()
             login(request, user)
             return redirect('home')
-
-    def get_user(self, uidb64):
-        try:
-            # urlsafe_base64_decode() decodes to bytestring
-            uid = urlsafe_base64_decode(uidb64).decode()
-            user = User.objects.get(pk=uid)
-        except (
-            TypeError,
-            ValueError,
-            OverflowError,
-            User.DoesNotExist,
-            ValidationError,
-        ):
-            user = None
-        return user
 
 
 class Register(View):
@@ -88,8 +92,31 @@ class AccountView(View):
 
     def get(self, request):
         context = {
-
+            'form': UserChangeForm()
         }
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        form = UserChangeForm(request.POST)
+        user = request.user
+
+        context = {
+            'form': form,
+            'answ': "Данные не записаны!"
+        }
+
+        if form.is_valid:
+            login_data = request.POST.dict()
+            username = login_data.get("username")
+
+            user.username = username
+            user.save()
+            context = {
+                'form': form,
+                'answ': username
+            }
+            return render(request, self.template_name, context)
+
         return render(request, self.template_name, context)
 
 

@@ -1,4 +1,9 @@
 {% extends 'main/account.html' %}
 {% block usercontent %}
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam animi corporis deleniti dignissimos dolores et, expedita impedit libero minus.</p>
+    <form action="{% url 'profile' %}" method="post">
+        {{ form }}
+        {% csrf_token %}
+        <button type="submit">Применить</button>
+    </form>
+    <p>{{ answ }}</p>
 {% endblock %}

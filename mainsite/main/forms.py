@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model, authenticate
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django import forms
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -44,3 +44,9 @@ class UserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
         fields = ('username', 'email')
+
+
+class UserChangeForm(UserChangeForm):
+
+    class Meta(UserChangeForm.Meta):
+        model = User
