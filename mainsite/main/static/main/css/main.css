@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap');
+
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body {
+    background: url("/static/main/img/srv.png") top center fixed;
+    background-color: #000;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+main {
+    margin-bottom: 300px;
+    flex-grow: 1;
+}
+
+header {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #fff;
+    background-color: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(8px);
+}
+
+header .header-content {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 10%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+
+header .header-content .logo {
+    font-family: 'Chakra Petch';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    color: #fff;
+}
+
+header .header-content .hrefs {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+}
+
+header .header-content .hrefs .headeri {
+    color: #fff;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    transition: transform .25s ease;
+}
+
+header .header-content .hrefs .headeri:hover {
+    transform: scale(1.05);
+    color: #B8B8B8;
+    cursor: pointer;
+}
+
+footer {
+    flex-shrink: 0;
+    display: flex;
+    width: 100%;
+    height: 300px;
+    border-top: 1px solid #fff;
+    background-color: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(8px);
+}
+
+footer .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    width: 80%;
+    margin: 0 10%;
+}
+
+footer .footer-content > div {
+    width: 400px;
+}
+
+footer .footer-content > div ul li {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: normal;
+    color: #fff;
+}
+
+footer .footer-content > div p {
+    margin-left: 25px;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: normal;
+    color: #fff;
+}

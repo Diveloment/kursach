@@ -1,0 +1,130 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block head %}
+    <style>
+        body .features {
+            display: flex;
+            flex-direction: column;
+            font-family: Montserrat;
+            margin-top: 25px;
+            margin-left: 100px;
+            margin-right: 100px;
+        }
+
+        body .features * {
+            font-size: 18px;
+        }
+
+        .userstatus {
+            display: flex;
+            justify-content: space-between;
+            color: #fff;
+            border-bottom: 1px solid #ffffffe3;
+            background-color: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(12px);
+        }
+
+        .userstatus .lf {
+            align-self: center;
+            margin: 20px;
+        }
+
+        .userstatus .rg {
+            align-self: center;
+            margin: 20px;
+        }
+
+        .usernav {
+            display: flex;
+            min-width: 250px;
+            width: fit-content;
+            padding: 50px;
+            color: white;
+            border-right: 1px solid #ffffffe3;
+            border-radius: 0px;
+            background-color: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(12px);
+        }
+
+        .usernav ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .usernav ul li{
+            list-style-type: none;
+            color: white;
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+
+        .usernav ul .href {
+            transition: transform .25s ease;
+        }
+
+        .usernav ul .href a {
+            color: white;
+        }
+
+        .usernav ul .href:hover {
+            transform: scale(1.05);
+            color: #B8B8B8;
+            cursor: pointer;
+        }
+
+        .usernav ul .href a:hover {
+            transform: scale(1.05);
+            color: #B8B8B8;
+            cursor: pointer;
+        }
+
+        .usernav ul .back p {
+            color: darkgray;
+            font-size: 16px;
+        }
+
+        .userbody {
+            display: flex;
+            justify-content: space-between;
+            min-height: 70vh;
+        }
+
+        .useractions {
+            background-color: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(5px);
+            padding: 25px;
+            padding-left: 50px;
+            padding-top: 55px;
+            color: white;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="features">
+        <div class="userstatus">
+            <p class="lf">{{ user }} | {{ user.user_role|upper }}</p>
+            <p class="rg">{{ user.first_name }} {{ user.last_name }}</p>
+        </div>
+        <div class="userbody">
+            <div class="usernav">
+                <ul>
+                    <li class="back"><p><i class="fa-solid fa-user"></i> АККАУНТ</p></li>
+                    <li class="href"><a href="#">Профиль</a></li>
+                    <li class="href"><a href="#">Мои заявки</a></li>
+                    <li class="href"><a href="#">Уведомления</a></li>
+                    <li class="back"><p><i class="fa-solid fa-gear"></i> СЕРВИС</p></li>
+                    <li class="href"><a href="#">Смена пароля</a></li>
+                    <li class="href"><a href="#">Смена почты</a></li>
+                </ul>
+            </div>
+            <div class="useractions">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores blanditiis ipsum nisi nulla? Adipisci aliquid amet animi, dicta dolore dolorum eaque earum eligendi error impedit incidunt inventore laborum libero, maiores minima mollitia nisi nobis quibusdam quidem quis sit sunt voluptate voluptatum. Blanditiis cum deleniti eius nobis veritatis? Ad aliquid amet asperiores culpa deserunt dicta distinctio dolore doloribus eaque est exercitationem explicabo facilis fuga, fugit hic id iusto laudantium magnam magni maiores necessitatibus nihil non omnis praesentium provident quia quod recusandae rerum similique tempora unde ut vel veniam vitae voluptate voluptates voluptatum? Ab accusamus alias asperiores aspernatur at atque consequuntur debitis dolorum eaque eligendi et ex expedita, facere, in inventore ipsa ipsum labore molestias necessitatibus nesciunt nisi nostrum nulla odio optio placeat quas quibusdam quidem quos, ratione repudiandae suscipit tempora temporibus ullam velit veniam vero voluptate? Accusamus aliquid delectus dignissimos eos, excepturi exercitationem illo itaque nam possimus, reiciendis repellat velit, veniam.
+            </div>
+        </div>
+    </div>
+{% endblock %}

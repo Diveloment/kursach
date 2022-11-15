@@ -1,0 +1,57 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block head %}
+    <style>
+        body .features {
+            font-family: Montserrat;
+            width: 50%;
+            height 250px;
+            margin-top: 10%;
+            margin-left: 125px;
+        }
+
+        body .features * {
+            padding-bottom: 20px;
+        }
+
+        body .features h1 {
+            font-size: 80px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        body .features p {
+            font-size: 15px;
+            color: #efefef;
+            opacity: 0.75;
+            max-width: 70%;
+        }
+
+        body .features button {
+            margin-top: 20px;
+            padding-bottom: 20px;
+            padding-top: 20px;
+            padding-left: 100px;
+            padding-right: 100px;
+            border-radius: 1px;
+            font-weight: 500;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="features">
+        {% if user.is_authenticated %}
+            <h1>ДОБРО ПОЖАЛОВАТЬ, {{ user|upper }}</h1>
+        {% else %}
+            <h1>УСТАНОВИМ ВАШЕ ОБОРУДОВАНИЕ</h1>
+        {% endif %}
+        <p>Благодаря профессиональному подходу наши специалисты составят оптимальный проект (с минимизированными затратами) и подберут все необходимое оборудование. Монтажные работы выполняются в максимально сжатые сроки.
+        </p>
+        <a href="{% url 'home' %}"><button type="button" class="btn btn-outline-light">ПОДАТЬ ЗАЯВКУ</button></a>
+    </div>
+{% endblock %}
