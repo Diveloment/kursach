@@ -1,5 +1,14 @@
 {% extends 'main/account.html' %}
 {% block usercontent %}
+    <style>
+        form {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            width: 20%;
+            min-width: 250px;
+        }
+    </style>
     <form action="{% url 'profile' %}" method="post">
         {{ form }}
         {% csrf_token %}
