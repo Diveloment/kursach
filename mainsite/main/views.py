@@ -107,13 +107,15 @@ class AccountView(View):
 
         if form.is_valid:
             login_data = request.POST.dict()
-            username = login_data.get("username")
+            frst_name = login_data.get("first_name")
+            lst_name = login_data.get("last_name")
 
-            user.username = username
+            user.first_name = frst_name
+            user.last_name = lst_name
             user.save()
             context = {
                 'form': form,
-                'answ': username
+                'answ': "Данные успешно записаны!"
             }
             return render(request, self.template_name, context)
 

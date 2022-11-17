@@ -47,6 +47,18 @@ class UserCreationForm(UserCreationForm):
 
 
 class UserChangeForm(UserChangeForm):
+    first_name = forms.CharField(
+        label=_("Имя"),
+        max_length=25,
+        widget=forms.TextInput(attrs={"autocomplete": "first_name"})
+    )
+
+    last_name = forms.CharField(
+        label=_("Фамилия"),
+        max_length=35,
+        widget=forms.TextInput(attrs={"autocomplete": "last_name"})
+    )
 
     class Meta(UserChangeForm.Meta):
         model = User
+        fields = ('first_name', 'last_name')
