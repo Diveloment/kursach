@@ -50,15 +50,29 @@ class UserChangeForm(UserChangeForm):
     first_name = forms.CharField(
         label=_("Имя"),
         max_length=25,
-        widget=forms.TextInput(attrs={"autocomplete": "first_name"})
+        widget=forms.TextInput(attrs={"autocomplete": "given-name", 'placeholder': 'Имя'})
     )
 
     last_name = forms.CharField(
         label=_("Фамилия"),
         max_length=35,
-        widget=forms.TextInput(attrs={"autocomplete": "last_name"})
+        widget=forms.TextInput(attrs={"autocomplete": "family-name", 'placeholder': 'Фамилия'})
+    )
+
+    phone = forms.CharField(
+        label=_("Номер телефона"),
+        max_length=12,
+        widget=forms.TextInput(attrs={"autocomplete": "postal-code", 'placeholder': 'Номер телефона'}),
+        required=False
+    )
+
+    addr = forms.CharField(
+        label=_("Адрес"),
+        max_length=254,
+        widget=forms.Textarea(attrs={"autocomplete": "street-address", 'placeholder': 'Адрес'}),
+        required=False
     )
 
     class Meta(UserChangeForm.Meta):
         model = User
-        fields = ('first_name', 'last_name')
+        fields = ('first_name', 'last_name', 'phone', 'addr')

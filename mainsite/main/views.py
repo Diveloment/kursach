@@ -91,8 +91,16 @@ class AccountView(View):
     template_name = 'main/profile.html'
 
     def get(self, request):
+        form = UserChangeForm()
+        user = request.user
+
+        form = UserChangeForm(initial={'first_name': user.first_name,
+                                       'last_name': user.last_name,
+                                       'phone': user.phone,
+                                       'addr': user.address})
+
         context = {
-            'form': UserChangeForm()
+            'form': form
         }
         return render(request, self.template_name, context)
 
@@ -102,7 +110,8 @@ class AccountView(View):
 
         context = {
             'form': form,
-            'answ': "Данные не записаны!"
+            'answ': "Данные не записаны!",
+            'error': True
         }
 
         if form.is_valid:
@@ -112,6 +121,8 @@ class AccountView(View):
 
             user.first_name = frst_name
             user.last_name = lst_name
+            user.phone = login_data.get("phone")
+            user.address = login_data.get("addr")
             user.save()
             context = {
                 'form': form,

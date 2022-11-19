@@ -5,14 +5,72 @@
             display: flex;
             justify-content: space-between;
             flex-direction: column;
-            width: 20%;
-            min-width: 250px;
+            width: 40%;
+            min-width: 450px;
+            max-width: 700px;
+            align-self: center;
+            font-family: Montserrat;
+            padding: 50px;
+            border-radius: 25px;
+            backdrop-filter: blur(12px);
+        }
+
+        form * {
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 38px;
+            color: #fff;
+            margin-bottom: 25px;
+        }
+
+        .textfields > input {
+            width: 100%;
+            color: #000;
+            box-shadow: inset 4px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            border: none;
+            padding: 10px;
+        }
+
+        .textfields > textarea {
+            width: 100%;
+            color: #000;
+            box-shadow: inset 4px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            border: none;
+            padding: 10px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding-left: 50px;
+            padding-right: 50px;
+            border-radius: 1px;
+            font-weight: 500;
         }
     </style>
+    {% if answ and error %}
+        <div class="alert alert-warning" role="alert">
+            {{ answ }}
+        </div>
+    {% elif answ %}
+        <div class="alert alert-info" role="alert">
+            {{ answ }}
+        </div>
+    {% endif %}
     <form action="{% url 'profile' %}" method="post">
-        {{ form }}
+        <h1>Личная информация</h1>
+        <div class="textfields">
+            {{ form.first_name }}
+            {{ form.last_name }}
+            {{ form.phone }}
+            {{ form.addr }}
+        </div>
         {% csrf_token %}
-        <button type="submit">Применить</button>
+        <button type="submit" class="btn btn-outline-light">Применить</button>
     </form>
-    <p>{{ answ }}</p>
 {% endblock %}
