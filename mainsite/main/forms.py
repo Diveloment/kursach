@@ -8,6 +8,8 @@ from django.utils.translation import gettext_lazy as _
 
 from main.utils import send_email
 
+from main.models import Request
+
 User = get_user_model()
 
 
@@ -75,4 +77,21 @@ class UserChangeForm(UserChangeForm):
 
     class Meta(UserChangeForm.Meta):
         model = User
-        fields = ('first_name', 'last_name', 'phone', 'addr')
+        fields = ('first_name', 'last_name', 'phone', 'address')
+
+
+class RequestForm(forms.ModelForm):
+    title = forms.CharField(
+        label=_("Название"),
+        widget=forms.TextInput()
+    )
+
+    content = forms.CharField(
+        label=_("Контент"),
+        widget=forms.Textarea()
+    )
+
+    class Meta:
+        model = Request
+        fields = ('createdBy', 'title', 'content')
+        widgets = {'createdBy': forms.HiddenInput()}

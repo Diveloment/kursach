@@ -1,4 +1,12 @@
 {% extends 'main/account.html' %}
 {% block usercontent %}
-    <p>Lorem ipsum dolor sit amew36452376452365472364r adipisicing elit. Adipisci aliquam animi corporis deleniti dignissimos dolores et, expedita impedit libero minus.</p>
+    <form action="{% url 'requests' %}" method="post">
+        <h1>Личная информация</h1>
+        <div class="textfields">
+            {{ form }}
+        </div>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-light">Применить</button>
+    </form>
+    {{ answ }}
 {% endblock %}

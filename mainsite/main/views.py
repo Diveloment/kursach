@@ -15,6 +15,8 @@ from main.forms import AuthenticationForm
 
 from main.forms import UserChangeForm
 
+from main.forms import RequestForm
+
 User = get_user_model()
 
 
@@ -137,7 +139,28 @@ class AccountViewRequests(View):
     template_name = 'main/requests.html'
 
     def get(self, request):
+        user = request.user
+        form = RequestForm(initial={'createdBy': user})
         context = {
-
+            'form': form
         }
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        user = request.user
+        form = RequestForm(request.POST)
+
+        context = {
+            'form': form,
+            'answ': "Данные не записаны!"
+        }
+
+        if form.is_valid:
+            form.save()
+            context = {
+                'form': form,
+                'answ': "Данные успешно записаны!"
+            }
+            return render(request, self.template_name, context)
+
         return render(request, self.template_name, context)
