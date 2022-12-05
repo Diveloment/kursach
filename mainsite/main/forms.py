@@ -93,5 +93,16 @@ class RequestForm(forms.ModelForm):
 
     class Meta:
         model = Request
-        fields = ('createdBy', 'title', 'content')
-        widgets = {'createdBy': forms.HiddenInput()}
+        fields = ('createdBy', 'title', 'content', 'leads')
+        widgets = {'createdBy': forms.HiddenInput(), 'leads': forms.HiddenInput()}
+
+
+class RequestFormAdmin(RequestForm):
+    def __init__(self, *args, **kwargs):
+        super(RequestFormAdmin, self).__init__(*args, **kwargs)
+        self.fields['leads'].queryset = User.objects.filter(user_role='eng')
+        self.fields['createdBy'].queryset = User.objects.filter(user_role='client')
+
+    class Meta:
+        model = Request
+        fields = ('createdBy', 'title', 'content', 'status', 'leads')

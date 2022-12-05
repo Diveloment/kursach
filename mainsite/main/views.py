@@ -5,9 +5,12 @@ from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator as token_generator
 from django.views import View
+from django.views.generic import DetailView
 from main.forms import UserCreationForm
 
 from main.models import User
+
+from main.models import Request
 
 from main.utils import send_email
 
@@ -18,7 +21,6 @@ from main.forms import UserChangeForm
 from main.forms import RequestForm
 
 User = get_user_model()
-
 
 def get_user(uidb64):
     try:
@@ -158,9 +160,28 @@ class AccountViewRequests(View):
         if form.is_valid:
             form.save()
             context = {
-                'form': form,
+                'form': RequestForm(initial={'createdBy': user}),
                 'answ': "Данные успешно записаны!"
             }
             return render(request, self.template_name, context)
 
         return render(request, self.template_name, context)
+
+
+class AccountViewMyRequests(View):
+    template_name = 'main/my_req.html'
+
+    def get(self, request):
+        user = request.user
+        reqs = Request.objects.filter(createdBy=user)
+        reqs = reqs.order_by('status')
+        context = {
+            'reqs': reqs
+        }
+        return render(request, self.template_name, context)
+
+
+class ReqView(DetailView):
+    model = Request
+    template_name = 'main/detail_view.html'
+    context_object_name = 'req'
