@@ -52,6 +52,10 @@
         {% endif %}
         <p>Благодаря профессиональному подходу наши специалисты составят оптимальный проект (с минимизированными затратами) и подберут все необходимое оборудование. Монтажные работы выполняются в максимально сжатые сроки.
         </p>
-        <a href="{% url 'home' %}"><button type="button" class="btn btn-outline-light">ПОДАТЬ ЗАЯВКУ</button></a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'requests' %}"><button type="button" class="btn btn-outline-light">ПОДАТЬ ЗАЯВКУ</button></a>
+        {% else %}
+            <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-light">ПОДАТЬ ЗАЯВКУ</button></a>
+        {% endif %}
     </div>
 {% endblock %}

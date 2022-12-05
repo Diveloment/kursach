@@ -19,6 +19,20 @@
             margin-bottom: 25px;
         }
 
+        .reqblock {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            min-width: 450px;
+            max-width: 1000px;
+            align-self: center;
+            font-family: Montserrat;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 25px;
+            backdrop-filter: blur(12px);
+        }
+
         h1 {
             font-style: normal;
             font-weight: 600;
@@ -52,14 +66,30 @@
             border-radius: 1px;
             font-weight: 500;
         }
+
+        .alert {
+            padding-bottom: 5px;
+            padding-top: 5px;
+            width: fit-content;
+        }
     </style>
-    <form action="{% url 'requests' %}" method="post">
-        <h1>Заполнение заявки</h1>
-        <div class="textfields">
-            {{ form }}
+    {% for el in reqs %}
+        <div class="reqblock">
+            <h3>{{ el.title }}</h3>
+            {% if el.status == 'awaiting' %}
+                <div class="alert alert-info" role="alert">
+                    Ожидание
+                </div>
+            {% elif el.status == 'refused' %}
+                <div class="alert alert-warning" role="alert">
+                    Отклонено
+                </div>
+            {% else %}
+                <div class="alert alert-success" role="alert">
+                    Принято
+                </div>
+            {% endif %}
+            <a href="{% url 'req_detail' el.id %}"><button type="button" class="btn btn-outline-light">Просмотр</button></a>
         </div>
-        {% csrf_token %}
-        <button type="submit" class="btn btn-outline-light">Применить</button>
-    </form>
-    {{ answ }}
+    {% endfor %}
 {% endblock %}
