@@ -70,6 +70,7 @@
     <div class="reqblock">
         <h3>{{ req.title }}</h3>
         <p>{{ req.content }}</p>
+        <p>{{ req.status }}</p>
         <a href="{% url 'my_requests' %}"><button type="button" class="btn btn-outline-light">Назад</button></a>
     </div>
 {% endblock %}
