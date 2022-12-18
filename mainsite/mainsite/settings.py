@@ -31,6 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '192.168.1.100',
     '91.238.230.51',
+    '127.0.0.1',
 ]
 
 AUTH_USER_MODEL = 'main.User'
