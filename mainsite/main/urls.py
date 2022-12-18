@@ -10,6 +10,7 @@ from .views import Register, EmailVerify, MyLoginView, AccountView, AccountViewR
 
 urlpatterns = [
     path('', views.index, name='home'),
+    path('services/', TemplateView.as_view(template_name='main/services.html'), name='services'),
     path('logout_view/', views.logout_view, name='logout_view'),
     path('auth/login/', MyLoginView.as_view(), name='login'),
     path('auth/', include('django.contrib.auth.urls')),
