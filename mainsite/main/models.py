@@ -40,7 +40,7 @@ class Request(models.Model):
     content = models.TextField(blank=True, verbose_name='содержание')
     status = models.CharField(max_length=15, choices=REQ_STATUS, default='awaiting', verbose_name='статус')
     leads = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='leads', null=True, blank=True, verbose_name='куратор')
-    file = models.FileField(upload_to='uploads/', blank=True)
+    file = models.FileField(upload_to='uploads/')
 
     class Meta:
         verbose_name = _("заявка")

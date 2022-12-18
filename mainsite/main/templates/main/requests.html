@@ -53,7 +53,7 @@
             font-weight: 500;
         }
     </style>
-    <form action="{% url 'requests' %}" method="post">
+    <form action="{% url 'requests' %}" method="post" enctype="multipart/form-data">
         <h1>Заполнение заявки</h1>
         <div class="textfields">
             {{ form }}
