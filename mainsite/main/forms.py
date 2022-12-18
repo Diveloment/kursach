@@ -92,11 +92,15 @@ class RequestForm(forms.ModelForm):
         label=_("Контент"),
         widget=forms.Textarea()
     )
+    file = forms.FileField(
+        label=_("Прикрепить ТЗ"),
+        widget=forms.ClearableFileInput()
+    )
 
     class Meta:
         model = Request
         fields = ('createdBy', 'title', 'content', 'leads', 'file')
-        widgets = {'createdBy': forms.HiddenInput(), 'leads': forms.HiddenInput(), 'file': forms.FileInput()}
+        widgets = {'createdBy': forms.HiddenInput(), 'leads': forms.HiddenInput()}
 
 
 class RequestFormAdmin(RequestForm):
@@ -107,4 +111,4 @@ class RequestFormAdmin(RequestForm):
 
     class Meta:
         model = Request
-        fields = ('createdBy', 'title', 'content', 'status', 'leads', 'file')
+        fields = ('createdBy', 'title', 'content', 'status', 'leads', 'file', 'date')

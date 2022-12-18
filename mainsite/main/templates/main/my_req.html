@@ -106,9 +106,12 @@
                 <a href="{% url 'req_detail' el.id %}"><button type="button" class="btn btn-outline-light">Просмотр</button></a>
             </div>
             <div>
-                <h5>{{ el.createdBy.phone }}</h5>
+                <div style="display: flex; flex-direction: row; justify-content: space-between">
+                    <h5>{{ el.createdBy.phone }}</h5>
+                    <h5>{{ el.date }}</h5>
+                </div>
                 <p>{{ el.createdBy.address }}</p>
-                {{ el.file }}
+                <a href="/media/{{ el.file }}">{{ el.file }}</a>
             </div>
         </div>
     {% endfor %}

@@ -1,3 +1,5 @@
+import math
+
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.views import LoginView
 from django.core.exceptions import ValidationError
@@ -157,14 +159,23 @@ class AccountViewRequests(View):
 
         context = {
             'form': form,
-            'answ': "Данные не записаны!"
+            'answ': "Данные не записаны!",
+            'error': True
         }
 
         if form.is_valid:
+            if request.FILES and request.FILES['file'].size > 52428800:
+                context = {
+                    'form': form,
+                    'answ': "Данные не записаны! Файл слишком большой.",
+                    'size': math.floor(request.FILES['file'].size / 1024 / 1024),
+                    'error': True
+                }
+                return render(request, self.template_name, context)
             form.save()
             context = {
                 'form': RequestForm(initial={'createdBy': user}),
-                'answ': "Данные успешно записаны!"
+                'answ': "Данные успешно записаны!",
             }
             return render(request, self.template_name, context)
 

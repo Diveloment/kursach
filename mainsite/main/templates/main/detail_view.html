@@ -19,18 +19,44 @@
             margin-bottom: 25px;
         }
 
-        .reqblock {
+        @media (max-width: 1430px) {
+            .reqblock {
+                display: flex;
+                justify-content: space-between;
+                flex-direction: column;
+                min-width: 450px;
+                max-width: 1500px;
+                align-self: center;
+                font-family: Montserrat;
+                padding: 25px;
+                margin-bottom: 25px;
+                border-radius: 25px;
+                backdrop-filter: blur(12px);
+            }
+        }
+
+        @media (min-width: 1430px) {
+            .reqblock {
+                display: flex;
+                justify-content: space-between;
+                flex-direction: row;
+                min-width: 450px;
+                max-width: 1500px;
+                align-self: center;
+                font-family: Montserrat;
+                padding: 25px;
+                margin-bottom: 25px;
+                border-radius: 25px;
+                backdrop-filter: blur(12px);
+            }
+        }
+
+        .reqblock > div {
             display: flex;
-            justify-content: space-between;
             flex-direction: column;
-            min-width: 450px;
+            min-width: 400px;
             max-width: 1000px;
-            align-self: center;
-            font-family: Montserrat;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-radius: 25px;
-            backdrop-filter: blur(12px);
+            margin: 25px;
         }
 
         h1 {
@@ -66,11 +92,52 @@
             border-radius: 1px;
             font-weight: 500;
         }
+
+        h5 {
+            color: #B8B8B8;
+        }
+
+        .addr {
+            max-width: 450px;
+        }
+
+        .alert {
+            padding-bottom: 5px;
+            padding-top: 5px;
+            width: fit-content;
+            margin-bottom: 25px;
+            margin-top: 15px;
+        }
     </style>
     <div class="reqblock">
-        <h3>{{ req.title }}</h3>
-        <p>{{ req.content }}</p>
-        <a href="/media/{{ req.file }}">ssdsdsds</a>
-        <a href="{% url 'my_requests' %}"><button type="button" class="btn btn-outline-light">Назад</button></a>
-    </div>
+            <div>
+                <h3>{{ req.title }}</h3>
+                <h5>Заявитель: {{ req.createdBy.first_name }} {{ req.createdBy.last_name }}</h5>
+                {% if req.status == 'awaiting' %}
+                    <div class="alert alert-info" role="alert">
+                        Ожидание
+                    </div>
+                {% elif req.status == 'refused' %}
+                    <div class="alert alert-warning" role="alert">
+                        Отклонено
+                    </div>
+                {% else %}
+                    <div class="alert alert-success" role="alert">
+                        Принято
+                    </div>
+                {% endif %}
+                <p>{{ req.content }}</p>
+                <a style="width: fit-content" href="{% url 'my_requests' %}"><button type="button" class="btn btn-outline-light">Назад</button></a>
+            </div>
+            <div>
+                <div style="display: flex; flex-direction: row; justify-content: space-between">
+                    <h5>{{ req.createdBy.phone }}</h5>
+                    <h5>{{ req.date }}</h5>
+                </div>
+                <p class="addr">{{ req.createdBy.address }}</p>
+                {% if req.file %}
+                    <a style="width: fit-content" href="/media/{{ req.file }}"><button type="button" class="btn btn-outline-light">Скачать приложения: {{ req.file.name }}</button></a>
+                {% endif %}
+            </div>
+        </div>
 {% endblock %}

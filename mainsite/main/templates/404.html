@@ -1,0 +1,52 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block head %}
+    <meta http-equiv="Refresh" content="3; {% url 'home' %}">
+    <style>
+        body .features {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Montserrat;
+            margin-top: 10%;
+        }
+
+        body .features * {
+            padding-bottom: 20px;
+        }
+
+        body .features h1 {
+            font-size: 200px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        body .features p {
+            font-size: 15px;
+            color: #efefef;
+            opacity: 0.75;
+            max-width: 70%;
+        }
+
+        body .features button {
+            margin-top: 20px;
+            padding-bottom: 20px;
+            padding-top: 20px;
+            padding-left: 100px;
+            padding-right: 100px;
+            border-radius: 1px;
+            font-weight: 500;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h1>404</h1>
+        <p>Страница не найдена</p>
+    </div>
+{% endblock %}

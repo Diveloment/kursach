@@ -5,8 +5,8 @@
             display: flex;
             justify-content: space-between;
             flex-direction: column;
-            width: 40%;
-            min-width: 450px;
+            width: 50%;
+            min-width: 500px;
             max-width: 700px;
             align-self: center;
             font-family: Montserrat;
@@ -55,11 +55,19 @@
     </style>
     <form action="{% url 'requests' %}" method="post" enctype="multipart/form-data">
         <h1>Заполнение заявки</h1>
+        {% if answ and error %}
+            <div class="alert alert-warning" role="alert">
+                {{ answ }} {{ size }}МБ доступно: 50МБ
+            </div>
+        {% elif answ %}
+            <div class="alert alert-info" role="alert">
+                {{ answ }}
+            </div>
+        {% endif %}
         <div class="textfields">
             {{ form }}
         </div>
         {% csrf_token %}
         <button type="submit" class="btn btn-outline-light">Применить</button>
     </form>
-    {{ answ }}
 {% endblock %}
