@@ -4,9 +4,11 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator as token_generator
+from django.core.files.base import ContentFile, File
 from django.views import View
 from django.views.generic import DetailView
 from main.forms import UserCreationForm
+from main import models
 
 from main.models import User
 
@@ -21,6 +23,7 @@ from main.forms import UserChangeForm
 from main.forms import RequestForm
 
 User = get_user_model()
+
 
 def get_user(uidb64):
     try:
@@ -150,7 +153,7 @@ class AccountViewRequests(View):
 
     def post(self, request):
         user = request.user
-        form = RequestForm(request.POST)
+        form = RequestForm(request.POST, request.FILES)
 
         context = {
             'form': form,
@@ -173,7 +176,12 @@ class AccountViewMyRequests(View):
 
     def get(self, request):
         user = request.user
-        reqs = Request.objects.filter(createdBy=user)
+        is_staff = user.is_staff
+        if is_staff:
+            reqs = Request.objects.filter(leads=user)
+            reqs = reqs.filter(status='accepted')
+        else:
+            reqs = Request.objects.filter(createdBy=user)
         reqs = reqs.order_by('status')
         context = {
             'reqs': reqs

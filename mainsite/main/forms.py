@@ -1,3 +1,5 @@
+from cProfile import label
+
 from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django import forms
@@ -93,8 +95,8 @@ class RequestForm(forms.ModelForm):
 
     class Meta:
         model = Request
-        fields = ('createdBy', 'title', 'content', 'leads')
-        widgets = {'createdBy': forms.HiddenInput(), 'leads': forms.HiddenInput()}
+        fields = ('createdBy', 'title', 'content', 'leads', 'file')
+        widgets = {'createdBy': forms.HiddenInput(), 'leads': forms.HiddenInput(), 'file': forms.FileInput()}
 
 
 class RequestFormAdmin(RequestForm):
@@ -105,4 +107,4 @@ class RequestFormAdmin(RequestForm):
 
     class Meta:
         model = Request
-        fields = ('createdBy', 'title', 'content', 'status', 'leads')
+        fields = ('createdBy', 'title', 'content', 'status', 'leads', 'file')

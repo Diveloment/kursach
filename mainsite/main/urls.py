@@ -1,6 +1,9 @@
 from django.urls import path, include
 from django.contrib import admin
 from django.views.generic import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 from . import views
 from .views import Register, EmailVerify, MyLoginView, AccountView, AccountViewRequests, AccountViewMyRequests, ReqView
@@ -18,4 +21,7 @@ urlpatterns = [
     path('register/', Register.as_view(), name='register'),
     path('confirm_email/', TemplateView.as_view(template_name='registration/confirm_email.html'), name='confirm_email'),
     path('verify_email/<uidb64>/<token>/', EmailVerify.as_view(), name='verify_email'),
+
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

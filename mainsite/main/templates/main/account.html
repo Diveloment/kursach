@@ -108,7 +108,8 @@
 {% block content %}
     <div class="features">
         <div class="userstatus">
-            <p class="lf">{{ user }} | {{ user.user_role|upper }}</p>
+            <p class="lf">{{ user }} | {{ user.user_role|upper }}
+            </p>
             <p class="rg">{{ user.first_name }} {{ user.last_name }}</p>
         </div>
         <div class="userbody">
@@ -116,7 +117,11 @@
                 <ul>
                     <li class="back"><p><i class="fa-solid fa-user"></i> АККАУНТ</p></li>
                     <li class="href"><a href="{% url 'profile' %}">Профиль</a></li>
-                    <li class="href"><a href="{% url 'requests' %}">Подать заявку</a></li>
+                    {% if user.is_staff %}
+
+                    {% else %}
+                        <li class="href"><a href="{% url 'requests' %}">Подать заявку</a></li>
+                    {% endif %}
                     <li class="href"><a href="{% url 'my_requests' %}">Мои заявки</a></li>
                     <li class="back"><p><i class="fa-solid fa-gear"></i> СЕРВИС</p></li>
                     <li class="href"><a href="#">Смена пароля</a></li>
