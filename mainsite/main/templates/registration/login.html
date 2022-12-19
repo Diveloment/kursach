@@ -114,7 +114,7 @@
             {% csrf_token %}
             <button type="submit" class="btn btn-outline-light">ВОЙТИ</button>
             <a href="{% url 'register' %}" class="btn btn-outline-light">ЗАРЕГИСТРИРОВАТЬСЯ</a>
-            <a href="#" class="passres">Забыли пароль?</a>
+            <a href="{% url 'password_reset' %}" class="passres">Забыли пароль?</a>
         </form>
     </div>
 {% endblock %}

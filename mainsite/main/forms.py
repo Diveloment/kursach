@@ -12,6 +12,8 @@ from main.utils import send_email
 
 from main.models import Request
 
+from main.models import Feedback
+
 User = get_user_model()
 
 
@@ -112,3 +114,33 @@ class RequestFormAdmin(RequestForm):
     class Meta:
         model = Request
         fields = ('createdBy', 'title', 'content', 'status', 'leads', 'file', 'date')
+
+
+class FeedbackForm(forms.ModelForm):
+    name = forms.CharField(
+        label=_("Имя"),
+        max_length=25,
+        widget=forms.TextInput(attrs={"autocomplete": "given-name", 'placeholder': 'Имя'})
+    )
+
+    phone = forms.CharField(
+        label=_("Номер телефона"),
+        max_length=12,
+        widget=forms.TextInput(attrs={"autocomplete": "postal-code", 'placeholder': 'Номер телефона'}),
+        required=False
+    )
+
+    email = forms.EmailField(
+        label=_("Почта"),
+        max_length=254,
+        widget=forms.EmailInput(attrs={"autocomplete": "email"}),
+    )
+
+    content = forms.CharField(
+        label=_("Содержание"),
+        widget=forms.Textarea()
+    )
+
+    class Meta:
+        model = Feedback
+        fields = ('name', 'phone', 'email', 'content')

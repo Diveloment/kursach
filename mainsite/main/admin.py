@@ -8,6 +8,10 @@ from main.forms import RequestFormAdmin
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
+from main.models import Feedback
+
+from main.forms import FeedbackForm
+
 User = get_user_model()
 
 
@@ -22,3 +26,10 @@ class RequestAdmin(ModelAdmin):
     form = RequestFormAdmin
 
     list_display = ('title', 'createdBy')
+
+
+@admin.register(Feedback)
+class FeedbackAdmin(ModelAdmin):
+    form = FeedbackForm
+
+    list_display = ('name', 'email', 'phone', 'content')

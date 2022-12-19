@@ -48,3 +48,20 @@ class Request(models.Model):
         verbose_name = _("заявка")
         verbose_name_plural = _("заявки")
 
+
+class Feedback(models.Model):
+    name = models.CharField(max_length=25, verbose_name='Имя')
+    phone = models.CharField(default='', max_length=12, unique=False, blank=True, null=True)
+    email = models.EmailField(
+        _('Email'),
+        max_length=254,
+        unique=False,
+        blank=True,
+        null=True
+    )
+    content = models.TextField(blank=True, verbose_name='содержание')
+
+    class Meta:
+        verbose_name = _("отзыв")
+        verbose_name_plural = _("отзывы")
+

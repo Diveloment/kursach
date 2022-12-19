@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap');
+
+:root {
+    --primary: #141414;
+    --secondary: #141414;
+    --accent: #fff;
+    --primary-fg: #fff;
+
+    --link-fg: #fff;
+}
+
+.logo {
+    font-family: 'Chakra Petch';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    color: #fff;
+}
+
+body {
+    font-family: Montserrat;
+    background: url("/static/main/img/srv.png") top center fixed;
+    background-color: #000;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+#header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #fff;
+    background-color: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(8px);
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-size: 24px;
+}
+
+#user-tools {
+    font-size: 16px;
+}
+
+#logout-form button {
+    font-size: 16px;
+}

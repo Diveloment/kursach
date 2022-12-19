@@ -6,16 +6,20 @@ from django.conf.urls.static import static
 
 
 from . import views
-from .views import Register, EmailVerify, MyLoginView, AccountView, AccountViewRequests, AccountViewMyRequests, ReqView
+from .views import Register, EmailVerify, MyLoginView, AccountView, AccountViewRequests, AccountViewMyRequests, ReqView, \
+    MyPasswordResetView, FeedbackView
 
 urlpatterns = [
     path('', views.index, name='home'),
     path('services/', TemplateView.as_view(template_name='main/services.html'), name='services'),
     path('logout_view/', views.logout_view, name='logout_view'),
     path('auth/login/', MyLoginView.as_view(), name='login'),
+    path('auth/password_reset/', MyPasswordResetView.as_view(), name='password_reset'),
     path('auth/', include('django.contrib.auth.urls')),
     path('about/', TemplateView.as_view(template_name='main/about.html'), name='about'),
+    path('accounts/login/', MyLoginView.as_view()),
     path('account/profile', AccountView.as_view(), name='profile'),
+    path('account/feedback', FeedbackView.as_view(), name='feedback'),
     path('account/requests', AccountViewRequests.as_view(), name='requests'),
     path('account/my_requests', AccountViewMyRequests.as_view(), name='my_requests'),
     path('account/my_requests/<int:pk>', ReqView.as_view(), name='req_detail'),

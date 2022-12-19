@@ -1,7 +1,8 @@
 import math
 
 from django.contrib.auth import authenticate, login, get_user_model
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.views import LoginView, PasswordResetView
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_decode
@@ -23,6 +24,8 @@ from main.forms import AuthenticationForm
 from main.forms import UserChangeForm
 
 from main.forms import RequestForm
+
+from main.forms import FeedbackForm
 
 User = get_user_model()
 
@@ -57,6 +60,10 @@ def logout_view(request):
 
 class MyLoginView(LoginView):
     form_class = AuthenticationForm
+
+
+class MyPasswordResetView(PasswordResetView):
+    form_class = PasswordResetForm
 
 
 class EmailVerify(View):
@@ -193,10 +200,46 @@ class AccountViewMyRequests(View):
             reqs = reqs.filter(status='accepted')
         else:
             reqs = Request.objects.filter(createdBy=user)
-        reqs = reqs.order_by('status')
+            reqs = reqs.order_by('status')
+            context = {
+                'reqs': reqs
+            }
+        return render(request, self.template_name, context)
+
+
+class FeedbackView(View):
+    template_name = 'main/feedback.html'
+
+    def get(self, request):
+        form = FeedbackForm()
+        user = request.user
+
+        form = FeedbackForm(initial={'name': user.first_name,
+                                       'phone': user.phone,
+                                       'email': user.email})
+
         context = {
-            'reqs': reqs
+            'form': form
         }
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        form = FeedbackForm(request.POST)
+
+        context = {
+            'form': form,
+            'answ': "Данные не записаны!",
+            'error': True
+        }
+
+        if form.is_valid:
+            form.save()
+            context = {
+                'form': form,
+                'answ': "Данные успешно записаны!"
+            }
+            return render(request, self.template_name, context)
+
         return render(request, self.template_name, context)
 
 

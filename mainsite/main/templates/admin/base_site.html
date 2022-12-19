@@ -1,0 +1,12 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}Админ панель{% endblock %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static 'main/css/admin-extra.css' %}" />{% endblock %}
+
+{% block branding %}
+<a class="logo" href="{% url 'home' %}">arccorp</a>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
