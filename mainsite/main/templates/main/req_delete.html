@@ -26,7 +26,6 @@
                 flex-direction: column;
                 min-width: 450px;
                 max-width: 1500px;
-                align-self: center;
                 font-family: Montserrat;
                 padding: 25px;
                 margin-bottom: 25px;
@@ -39,7 +38,8 @@
             .reqblock {
                 display: flex;
                 justify-content: space-between;
-                flex-direction: row;
+                flex-direction: column;
+                align-items: center;
                 min-width: 450px;
                 max-width: 1500px;
                 align-self: center;
@@ -110,35 +110,10 @@
         }
     </style>
     <div class="reqblock">
-            <div>
-                <h3>{{ req.title }}</h3>
-                <h5>Заявитель: {{ req.createdBy.first_name }} {{ req.createdBy.last_name }}</h5>
-                {% if req.status == 'awaiting' %}
-                    <div class="alert alert-info" role="alert">
-                        Ожидание
-                    </div>
-                {% elif req.status == 'refused' %}
-                    <div class="alert alert-warning" role="alert">
-                        Отклонено
-                    </div>
-                {% else %}
-                    <div class="alert alert-success" role="alert">
-                        Принято
-                    </div>
-                {% endif %}
-                <p>{{ req.content }}</p>
-                <a style="width: fit-content" href="{% url 'my_requests' %}"><button type="button" class="btn btn-outline-light">Назад</button></a>
-                <a style="width: fit-content" href="{% url 'req-delete' req.id %}"><button type="button" class="btn btn-outline-light">Удалить</button></a>
-            </div>
-            <div>
-                <div style="display: flex; flex-direction: row; justify-content: space-between">
-                    <h5>{{ req.createdBy.phone }}</h5>
-                    <h5>{{ req.date }}</h5>
-                </div>
-                <p class="addr">{{ req.createdBy.address }}</p>
-                {% if req.file %}
-                    <a style="width: fit-content" href="/media/{{ req.file }}"><button type="button" class="btn btn-outline-light">Скачать приложения: {{ req.file.name }}</button></a>
-                {% endif %}
-            </div>
-        </div>
+        <h1>Удаление записи</h1>
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit">Удалить заявку</button>
+        </form>
+    </div>
 {% endblock %}

@@ -9,7 +9,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator as token_generator
 from django.core.files.base import ContentFile, File
 from django.views import View
-from django.views.generic import DetailView
+from django.views.generic import DetailView, DeleteView
 from main.forms import UserCreationForm
 from main import models
 
@@ -247,3 +247,9 @@ class ReqView(DetailView):
     model = Request
     template_name = 'main/detail_view.html'
     context_object_name = 'req'
+
+
+class ReqDeleteView(DeleteView):
+    model = Request
+    success_url = '/account/my_requests'
+    template_name = 'main/req_delete.html'
